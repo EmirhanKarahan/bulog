@@ -1,4 +1,5 @@
 .button {
+  width: 8rem;
   background: $blue;
   border: none;
   color: white;
@@ -12,7 +13,7 @@
   border-radius: $xxs-size;
 }
 
-.button:hover {
+.button:hover, .button:focus {
   transform: scale(1.06);
 }
 

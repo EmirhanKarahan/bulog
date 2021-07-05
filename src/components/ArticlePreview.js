@@ -10,7 +10,7 @@ export default function ArticlePreview() {
             <h2 className="article-preview__title">
               Lorem ipsum dolor sit amet.
             </h2>
-            <h4 className="article-preview__sub-title">
+            <h4 className="article-preview__subtitle">
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe
               molestias deserunt eum suscipit, neque est ex.
             </h4>

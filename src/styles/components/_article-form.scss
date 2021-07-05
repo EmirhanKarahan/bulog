@@ -1,0 +1,60 @@
+.article-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.text-input {
+  margin-bottom: $s-size;
+  border: none;
+  border-bottom: solid;
+}
+
+.text-input:focus,
+.text-input:hover {
+  outline: none;
+}
+
+.text-input--title {
+  min-height: 5rem;
+  font-size: $l-size;
+}
+
+.text-input--subtitle {
+  min-height: 4rem;
+  font-size: 2rem;
+}
+
+.file-input {
+  display: none;
+}
+
+.file-input__label {
+  height: fit-content;
+  padding: $s-size;
+  border-radius: $xxs-size;
+  width: fit-content;
+  background-color: orangered;
+  color: white;
+  font-size: $font-size-large;
+  font-weight: 300;
+
+  &:hover,
+  &:focus {
+    transform: scale(1.06);
+  }
+}
+
+.error-msg{
+  color: orangered;  
+
+   &::before{
+     content: " 😿";
+   }
+}
+
+.text-input--content {
+  border-bottom: none;
+  resize: none;
+  overflow: hidden;
+  min-height: 10rem;
+}

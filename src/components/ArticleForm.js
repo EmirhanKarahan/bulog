@@ -3,7 +3,7 @@ import { Form, Field, withFormik } from "formik";
 import AutoSizeTextArea from "react-textarea-autosize";
 import * as Yup from "yup";
 
-function ArticleForm({ values, errors, touched, isSubmitting }) {
+function ArticleForm({ values, errors, touched, isSubmitting, setFieldValue}) {
   return (
     <Form className="article-form">
       <div className="article-form__error-area">
@@ -34,15 +34,18 @@ function ArticleForm({ values, errors, touched, isSubmitting }) {
         as={AutoSizeTextArea}
         name="content"
         className="text-input text-input--content"
-        placeholder="Your unique blog"
+        placeholder="Your unique blog post"
       />
       <label className="file-input__label mb-1">
-        {values.image ? values.image.split("\\").slice(-1) : "Choose an image"}
-        <Field
+        {values.image.name || "Choose an image"}
+        <input
           type="file"
           name="image"
           accept=".jpeg, .jpg, .jfif, .webp., .png"
           className="file-input"
+          onChange={(event) =>{
+            setFieldValue("image", event.target.files[0]);
+          }}
         />
       </label>
       <button
@@ -70,9 +73,8 @@ const ArticleFormik = withFormik({
     subtitle: Yup.string().min(2).max(10).required(),
     content: Yup.string().min(2).required(),
   }),
-  handleSubmit(values, { resetForm, setErrors, setSubmitting }) {
-    console.log(values);
-    setSubmitting(false);
+  handleSubmit(values, { resetForm, setErrors, setSubmitting, props }) {
+    props.onSubmit(values)
     resetForm();
   },
 })(ArticleForm);

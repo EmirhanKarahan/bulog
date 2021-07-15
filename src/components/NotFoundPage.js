@@ -1,19 +1,9 @@
-import React from 'react'
-import Header from "./Header"
-import Footer from "./Footer"
-
+import React from "react";
 
 export default function NotFoundPage() {
-    return (
-        <>
-         <Header></Header>
-         <div className="not-found">
-         
-            <img src="/images/404.gif" alt="" />
-       
-         </div>
-         
-         <Footer></Footer>   
-        </>
-    )
+  return (
+    <div className="not-found">
+      <img src="/images/404.gif" alt="" />
+    </div>
+  );
 }

@@ -9,6 +9,9 @@ export default function Header(){
           <Link className="header__title" to="/">
             <h1>Bulog</h1>
           </Link>
+          <Link className="header__title" to="/create">
+            <h1>Create</h1>
+          </Link>
           <button className="button">
             Login
           </button>

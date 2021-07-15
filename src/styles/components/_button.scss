@@ -11,6 +11,9 @@
   text-decoration: none;
   height: $xl-size;
   border-radius: $xxs-size;
+  &:disabled{
+    opacity: .2;
+  }
 }
 
 .button:hover, .button:focus {

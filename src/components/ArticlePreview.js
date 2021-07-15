@@ -1,25 +1,43 @@
 import React from "react";
+import moment from "moment";
+import { Link } from "react-router-dom";
+import { connect } from "react-redux"
+import {startRemoveArticle } from "../actions/articles"
 
-export default function ArticlePreview() {
+function ArticlePreview({
+  id,
+  author,
+  title,
+  subtitle,
+  date,
+  imageUrl,
+  ...rest
+}) {
   return (
     <article className="article-preview">
       <div className="content-container">
         <div className="article-preview__content">
           <div className="article-preview__meta">
-            <span className="article-preview__author">Emirhan KARAHAN</span>
-            <h2 className="article-preview__title">
-              Lorem ipsum dolor sit amet.
-            </h2>
-            <h4 className="article-preview__subtitle">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe
-              molestias deserunt eum suscipit, neque est ex.
-            </h4>
-            <span className="article-preview__date">Jun 26 - 2020</span>
+            <span className="article-preview__author">{author}</span>
+            <h2 className="article-preview__title">{title}</h2>
+            <Link to={`/read/${id}`}> <h3>tamamını oku</h3>
+               </Link>
+            <Link to={`/edit/${id}`}> <h3>editle</h3>
+               </Link>
+        <button onClick={()=>{rest.dispatch(startRemoveArticle({ id }));}}>
+    Sil
+        </button>
+               
+            <h4 className="article-preview__subtitle">{subtitle}</h4>
+            <span className="article-preview__date">
+              {moment(date).format("MMMM Do, YYYY")}
+            </span>
           </div>
-
-          <img src="/images/image.png" className="article-preview__image" />
+          <img src={imageUrl} className="article-preview__image" />
         </div>
       </div>
     </article>
   );
 }
+
+export default connect()(ArticlePreview)

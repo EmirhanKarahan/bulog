@@ -1,14 +1,23 @@
 const path = require("path");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-module.exports = () => {
+const Dotenv = require("dotenv-webpack");
+
+process.env.NODE_ENV = process.env.NODE_ENV || "development";
+
+module.exports = (env) => {
+  const isProduction = env === 'production';
+
   return {
-    mode: "development",
+    devtool: isProduction ? 'source-map' : 'inline-source-map',
     entry: ["babel-polyfill", "./src/app.js"],
     output: {
       path: path.resolve(__dirname, "public", "dist"),
       filename: "bundle.js",
     },
-    plugins: [new MiniCssExtractPlugin({ filename: "styles.css" })],
+    plugins: [
+      new MiniCssExtractPlugin({ filename: "styles.css" }),
+      new Dotenv({path:`./.env.${process.env.NODE_ENV}`})
+    ],
     module: {
       rules: [
         {

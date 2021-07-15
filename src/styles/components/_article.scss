@@ -1,0 +1,40 @@
+.article__content {
+  display: flex;
+  flex-direction: column;
+  padding: $s-size 0;
+  align-items: center;
+}
+
+.article__meta {
+  width: 100%;
+}
+
+.article__text {
+  white-space: "pre-line";
+  margin-bottom: $m-size;
+}
+
+.article__title {
+  line-height: 1;
+}
+
+.article__subtitle {
+  line-height: 1;
+}
+
+.article__author {
+  font-style: italic;
+}
+
+.article__date {
+  font-style: italic;
+  &::before {
+    content: " - ";
+  }
+}
+
+.article__image {
+  width: 80%;
+  height: 40rem;
+  object-fit: cover;
+}

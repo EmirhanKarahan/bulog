@@ -1,7 +1,11 @@
-.mb-1{
-    margin-bottom: $s-size;
+.mb-1 {
+  margin-bottom: $s-size;
 }
 
-.mb-2{
-    margin-bottom: $m-size;
+.mb-2 {
+  margin-bottom: $m-size;
+}
+
+.blur-5 {
+  filter: blur(5px);
 }

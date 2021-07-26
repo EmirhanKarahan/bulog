@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { startAddArticle } from "../actions/articles";
-import ArticleForm from "./ArticleForm";
+import CreateArticleForm from "./CreateArticleForm";
 
 const CreateArticlePage = (props) => {
   const onSubmit = (article) => {
@@ -11,7 +11,7 @@ const CreateArticlePage = (props) => {
   return (
     <div className="content-container">
       <h1>Create your article</h1>
-      <ArticleForm onSubmit={onSubmit}></ArticleForm>
+      <CreateArticleForm onSubmit={onSubmit}></CreateArticleForm>
     </div>
   );
 };

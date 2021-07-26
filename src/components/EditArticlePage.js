@@ -1,19 +1,18 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
-import ArticleForm from "./ArticleForm";
+import EditArticleForm from "./EditArticleForm";
 import { startEditArticle } from "../actions/articles";
 
 const EditArticlePage = (props) => {
   const onSubmit = (updatedArticle) => {
     props.dispatch(startEditArticle(props.article.id, updatedArticle));
-    props.history.push(`/read/${props.article.id}`);
   };
 
   return props.article ? (
     <div className="content-container">
       <h1>Edit your article</h1>
-      <ArticleForm onSubmit={onSubmit} {...props.article}></ArticleForm>
+      <EditArticleForm onSubmit={onSubmit} {...props.article}></EditArticleForm>
     </div>
   ) : (
     <Redirect to="/404" />

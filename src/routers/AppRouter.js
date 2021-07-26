@@ -1,6 +1,6 @@
 import React from "react";
 import { Router, Route, Switch, Redirect} from "react-router-dom";
-import { createBrowserHistory } from "history";
+import { createBrowserHistory, createMemoryHistory } from "history";
 
 import Article from "../components/Article";
 import ArticleDashboardPage from "../components/ArticleDashboardPage";
@@ -10,7 +10,7 @@ import NotFoundPage from "../components/NotFoundPage";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 
-export const history = createBrowserHistory();
+export const history = process.env.NODE_ENV == "test" ? createMemoryHistory() : createBrowserHistory();
 
 const AppRouter = () => (
   <Router history={history}>

@@ -1,7 +1,14 @@
 import moment from "moment";
-import { database, storage } from "../firebase/firebase";
-import { v4 as uuid } from "uuid";
 import { history } from "../routers/AppRouter";
+import {
+  addArticleFirebase,
+  deleteImageFirebase,
+  editArticleFirebase,
+  getArticleByIdFirebase,
+  getArticlesFirebase,
+  removeArticleFirebase,
+  uploadImageFirebase,
+} from "../firebase/utils";
 
 export const addArticle = (article) => {
   return {
@@ -11,56 +18,20 @@ export const addArticle = (article) => {
 };
 
 export const startAddArticle = (articleData = {}) => {
-  return (dispatch) => {
+  return async (dispatch) => {
     const {
       title = "",
       subtitle = "",
       content = "",
-      image = null,
+      image = undefined,
       date = moment().unix(),
     } = articleData;
 
-    const uploadTask = storage.ref(`images/${image.name.split(".")[0]}-${uuid()}`).put(image);
-
-    uploadTask.on(
-      "state_changed",
-      (snapshot) => {
-        let progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-        console.log("Upload is " + progress + "% done");
-      },
-      (error) => {
-        console.error("Upload is failed");
-      },
-      () => {
-        uploadTask.snapshot.ref.getDownloadURL().then((imageUrl) => {
-          const article = { title, subtitle, content, date, imageUrl };
-          database
-            .ref("/articles")
-            .push(article)
-            .then((ref) => {
-              dispatch(addArticle({ id: ref.key, ...article }))
-              history.push("/");
-            })
-            .catch((err) => console.error(err));
-        });
-      }
-    )
-  };
-};
-
-export const removeArticle = ({ id } = {}) => ({
-  type: "REMOVE_ARTICLE",
-  id,
-});
-
-export const startRemoveArticle = ({ id } = {}) => {
-  return (dispatch, getState) => {
-    return database
-      .ref(`articles/${id}`)
-      .remove()
-      .then(() => {
-        dispatch(removeArticle({ id }));
-      });
+    const imageUrl = await uploadImageFirebase(image);
+    const article = { title, subtitle, content, date, imageUrl };
+    const ref = await addArticleFirebase(article);
+    dispatch(addArticle({ id: ref.key, ...article }));
+    history.push("/");
   };
 };
 
@@ -70,14 +41,34 @@ export const editArticle = (id, updates) => ({
   updates,
 });
 
-export const startEditArticle = (id, updates) => {
-  return (dispatch, getState) => {
-    return database
-      .ref(`articles/${id}`)
-      .update(updates)
-      .then(() => {
-        dispatch(editArticle(id, updates));
-      });
+export const startEditArticle = (
+  id,
+  { title, subtitle, content, image, imageUrl }
+) => {
+  return async (dispatch) => {
+    if (image) {
+      await deleteImageFirebase(imageUrl);
+      imageUrl = await uploadImageFirebase(image);
+    }
+    const updates = { title, subtitle, content, imageUrl };
+    await editArticleFirebase(id, updates);
+    dispatch(editArticle(id, updates));
+    history.push(`/read/${id}`);
+  };
+};
+
+export const removeArticle = ({ id } = {}) => ({
+  type: "REMOVE_ARTICLE",
+  id,
+});
+
+export const startRemoveArticle = ({ id } = {}) => {
+  return async (dispatch, getState) => {
+    dispatch(removeArticle({ id }));
+    const snapshot = await getArticleByIdFirebase(id);
+    const imageUrl = snapshot.val().imageUrl;
+    await deleteImageFirebase(imageUrl);
+    await removeArticleFirebase(id);
   };
 };
 
@@ -87,20 +78,12 @@ export const setArticles = (articles) => ({
 });
 
 export const startSetArticles = () => {
-  return (dispatch, getState) => {
-    return database
-      .ref(`articles`)
-      .once("value")
-      .then((snapshot) => {
-        const articles = [];
-
-        snapshot.forEach((childSnapshot) => {
-          articles.push({
-            id: childSnapshot.key,
-            ...childSnapshot.val(),
-          });
-        });
-        dispatch(setArticles(articles));
-      });
+  return async (dispatch, getState) => {
+    const snapshot = await getArticlesFirebase();
+    const articles = [];
+    snapshot.forEach((childSnapshot) => {
+      articles.push({ id: childSnapshot.key, ...childSnapshot.val() });
+    });
+    dispatch(setArticles(articles));
   };
 };

@@ -5,7 +5,7 @@ import {
   deleteImageFirebase,
   editArticleFirebase,
   getArticleByIdFirebase,
-  getArticlesFirebase,
+  getArticlesAllFirebase,
   removeArticleFirebase,
   uploadImageFirebase,
 } from "../firebase/utils";
@@ -18,18 +18,21 @@ export const addArticle = (article) => {
 };
 
 export const startAddArticle = (articleData = {}) => {
-  return async (dispatch) => {
+  return async (dispatch, getState) => {
+    const uid = getState().auth.uid;
+    const username = getState().auth.username;
     const {
       title = "",
       subtitle = "",
       content = "",
       image = undefined,
       date = moment().unix(),
+      author = username
     } = articleData;
 
     const imageUrl = await uploadImageFirebase(image);
-    const article = { title, subtitle, content, date, imageUrl };
-    const ref = await addArticleFirebase(article);
+    const article = { author, title, subtitle, content, date, imageUrl};
+    const ref = await addArticleFirebase(uid, article);
     dispatch(addArticle({ id: ref.key, ...article }));
     history.push("/");
   };
@@ -45,13 +48,14 @@ export const startEditArticle = (
   id,
   { title, subtitle, content, image, imageUrl }
 ) => {
-  return async (dispatch) => {
+  return async (dispatch, getState) => {
+    const uid = getState().auth.uid;
     if (image) {
       await deleteImageFirebase(imageUrl);
       imageUrl = await uploadImageFirebase(image);
     }
     const updates = { title, subtitle, content, imageUrl };
-    await editArticleFirebase(id, updates);
+    await editArticleFirebase(uid, id, updates);
     dispatch(editArticle(id, updates));
     history.push(`/read/${id}`);
   };
@@ -64,11 +68,12 @@ export const removeArticle = ({ id } = {}) => ({
 
 export const startRemoveArticle = ({ id } = {}) => {
   return async (dispatch, getState) => {
+    const uid = getState().auth.uid;
     dispatch(removeArticle({ id }));
-    const snapshot = await getArticleByIdFirebase(id);
+    const snapshot = await getArticleByIdFirebase(uid, id);
     const imageUrl = snapshot.val().imageUrl;
     await deleteImageFirebase(imageUrl);
-    await removeArticleFirebase(id);
+    await removeArticleFirebase(uid, id);
   };
 };
 
@@ -79,11 +84,12 @@ export const setArticles = (articles) => ({
 
 export const startSetArticles = () => {
   return async (dispatch, getState) => {
-    const snapshot = await getArticlesFirebase();
+    const uid = getState().auth.uid;
+    const firebaseArticles = await getArticlesAllFirebase(uid);
     const articles = [];
-    snapshot.forEach((childSnapshot) => {
-      articles.push({ id: childSnapshot.key, ...childSnapshot.val() });
-    });
+    for(const articleKey in firebaseArticles){
+      articles.push({id:articleKey, ...firebaseArticles[articleKey]})
+    }
     dispatch(setArticles(articles));
   };
 };

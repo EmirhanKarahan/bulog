@@ -1,15 +1,21 @@
-import React from 'react'
-import { connect } from 'react-redux';
-import ArticlePreview from './ArticlePreview'
+import React from "react";
+import { connect } from "react-redux";
+import ArticlePreview from "./ArticlePreview";
 
-const ArticleList = ({articles}) => {
-    return articles.map((article) => <ArticlePreview key={article.id} {...article} />)
-}
-
-const mapStateToProps = (state) => {
-    return {
-        articles: state.articles
-    };
+const ArticleList = ({ editable, articles }) => {
+  return articles.length > 0 ? articles.map((article) => (
+    <ArticlePreview editable={editable} key={article.id} {...article} />
+  )) : <div className="content-container">There is no article 😔 Please, add one 😁</div>;
 };
 
-export default connect(mapStateToProps)(ArticleList)
+const mapStateToProps = (state, props) => {
+  return {
+    articles: props.editable
+      ? state.articles.map((article) => {
+          if (state.auth.username == article.author) return article;
+        })
+      : state.articles,
+  };
+};
+
+export default connect(mapStateToProps)(ArticleList);

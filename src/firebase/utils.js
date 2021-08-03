@@ -13,22 +13,33 @@ export function deleteImageFirebase(imageUrl) {
   return storage.refFromURL(imageUrl).delete();
 }
 
-export function addArticleFirebase(article) {
-  return database.ref("/articles").push(article);
+export function addArticleFirebase(uid, article) {
+  return database.ref(`users/${uid}/articles`).push(article);
 }
 
-export function editArticleFirebase(id, updates) {
-  return database.ref(`articles/${id}`).update(updates);
+export function editArticleFirebase(uid, id, updates) {
+  return database.ref(`users/${uid}/articles/${id}`).update(updates);
 }
 
-export function removeArticleFirebase(id) {
-  return database.ref(`articles/${id}`).remove();
+export function removeArticleFirebase(uid, id) {
+  return database.ref(`users/${uid}/articles/${id}`).remove();
 }
 
-export function getArticlesFirebase() {
-  return database.ref(`articles`).once("value");
+export function getArticlesAllFirebase() {
+  let articles = {};
+  return database
+    .ref("users")
+    .once("value")
+    .then((snapshot) => {
+      const users = snapshot.val();
+      for (const userKey in users) {
+        let userArticles = users[userKey].articles;
+        articles = { ...articles, ...userArticles };
+      }
+      return articles;
+    });
 }
 
-export function getArticleByIdFirebase(id) {
-  return database.ref(`articles/${id}`).once("value");
+export function getArticleByIdFirebase(uid, id) {
+  return database.ref(`users/${uid}/articles/${id}`).once("value");
 }

@@ -11,12 +11,13 @@
   text-decoration: none;
   height: $xl-size;
   border-radius: $xxs-size;
-  &:disabled{
-    opacity: .2;
+  &:disabled {
+    opacity: 0.2;
   }
 }
 
-.button:hover, .button:focus {
+.button:hover,
+.button:focus {
   transform: scale(1.06);
 }
 
@@ -26,4 +27,16 @@
 
 .button--secondary {
   background: #888;
+}
+
+.button--danger {
+  background: orangered;
+}
+
+.button--hollow {
+  background: transparent;
+  font-weight: bold;
+  border: none;
+  color: inherit;
+  width: auto;
 }

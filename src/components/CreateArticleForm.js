@@ -3,10 +3,17 @@ import { Form, Field, withFormik } from "formik";
 import AutoSizeTextArea from "react-textarea-autosize";
 import * as Yup from "yup";
 
-function ArticleForm({ values, errors, touched, isSubmitting, setFieldValue}) {
+function CreateArticleForm({
+  values,
+  errors,
+  touched,
+  isSubmitting,
+  setFieldValue,
+}) {
   return (
-    <Form className="article-form">
-      <div className="article-form__error-area">
+    <Form className={"create-article-form"}>
+      {isSubmitting && <img className="spinner" src="/images/spinner.svg" alt="spinner"/>}
+      <div className="error-area">
         {Object.keys(touched).map((field) => {
           if (errors[field]) {
             return (
@@ -20,6 +27,7 @@ function ArticleForm({ values, errors, touched, isSubmitting, setFieldValue}) {
       <Field
         type="text"
         name="title"
+        disabled={isSubmitting}
         className="text-input text-input--title"
         placeholder="Title"
         autoFocus
@@ -27,23 +35,26 @@ function ArticleForm({ values, errors, touched, isSubmitting, setFieldValue}) {
       <Field
         type="text"
         name="subtitle"
+        disabled={isSubmitting}
         className="text-input text-input--subtitle"
         placeholder="Subtitle"
       />
       <Field
         as={AutoSizeTextArea}
         name="content"
+        disabled={isSubmitting}
         className="text-input text-input--content"
         placeholder="Your unique blog post"
       />
       <label className="file-input__label mb-1">
-        {values.image.name || "Choose an image"}
+        {values.image ? values.image.name : "Choose an image"}
         <input
           type="file"
           name="image"
+          disabled={isSubmitting}
           accept=".jpeg, .jpg, .jfif, .webp., .png"
           className="file-input"
-          onChange={(event) =>{
+          onChange={(event) => {
             setFieldValue("image", event.target.files[0]);
           }}
         />
@@ -59,24 +70,24 @@ function ArticleForm({ values, errors, touched, isSubmitting, setFieldValue}) {
   );
 }
 
-const ArticleFormik = withFormik({
+const CreateArticleFormik = withFormik({
   mapPropsToValues({ title, subtitle, content, image }) {
     return {
       title: title || "",
       subtitle: subtitle || "",
       content: content || "",
-      image: image || "",
+      image: image || undefined,
     };
   },
   validationSchema: Yup.object().shape({
-    title: Yup.string().min(2).max(10).required(),
-    subtitle: Yup.string().min(2).max(10).required(),
-    content: Yup.string().min(2).required(),
+    title: Yup.string().min(10).max(80).required(),
+    subtitle: Yup.string().min(15).max(100).required(),
+    content: Yup.string().min(100).required(),
+    image: Yup.mixed().required(),
   }),
-  handleSubmit(values, { resetForm, setErrors, setSubmitting, props }) {
-    props.onSubmit(values)
-    resetForm();
+  handleSubmit(values, { resetForm, props }) {
+    props.onSubmit(values);
   },
-})(ArticleForm);
+})(CreateArticleForm);
 
-export default ArticleFormik;
+export default CreateArticleFormik;

@@ -1,8 +1,30 @@
-.article-form {
+.create-article-form,
+.edit-article-form {
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 
+.edit-article-form {
+  .image-preview {
+    width: 30rem;
+    height: 20rem;
+    object-fit: cover;
+    border-radius: $s-size;
+    margin-bottom: $s-size;
+  }
+}
+
+.spinner{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100px;
+  height: 100px;
+  transform: translate(-50%,-50%);
+}
+
+// Common css for create and edit article forms
 .text-input {
   margin-bottom: $s-size;
   border: none;
@@ -44,12 +66,12 @@
   }
 }
 
-.error-msg{
-  color: orangered;  
+.error-msg {
+  color: orangered;
 
-   &::before{
-     content: " 😿";
-   }
+  &::before {
+    content: " 😿";
+  }
 }
 
 .text-input--content {

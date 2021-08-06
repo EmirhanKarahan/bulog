@@ -10,6 +10,7 @@ const ArticleList = ({ editable, articles }) => {
 
 const mapStateToProps = (state, props) => {
   return {
+    //should be changed to a new solution - not a problem for firebase
     articles: props.editable
       ? state.articles.map((article) => {
           if (state.auth.username == article.author) return article;

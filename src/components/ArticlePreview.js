@@ -41,7 +41,7 @@ function ArticlePreview({
 
             {editable ? (
               <div className="article-preview__right__toolbox">
-                <Link className="url-link" to={`/edit/${id}`}>
+                <Link className="url-link flex justify-center items-center" to={`/edit/${id}`}>
                   <img
                     src="/images/gear.svg"
                     height="20px"

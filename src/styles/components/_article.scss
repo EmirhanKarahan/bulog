@@ -12,14 +12,17 @@
 .article__text {
   white-space: "pre-line";
   margin-bottom: $m-size;
+  word-break: break-all;
 }
 
 .article__title {
   line-height: 1;
+  word-break: break-all;
 }
 
 .article__subtitle {
   line-height: 1;
+  word-break: break-all;
 }
 
 .article__author {
@@ -34,7 +37,11 @@
 }
 
 .article__image {
-  width: 80%;
-  height: 40rem;
+  width: 98%;
   object-fit: cover;
+
+  @media (min-width: $desktop-breakpoint) {
+    width: 80%;
+    height: 40rem;
+  }
 }

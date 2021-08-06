@@ -1,5 +1,5 @@
 import React from "react";
-import { Router, Route, Switch, Redirect} from "react-router-dom";
+import { Router, Route, Switch} from "react-router-dom";
 import { createBrowserHistory, createMemoryHistory } from "history";
 
 import Article from "../components/Article";

@@ -26,7 +26,7 @@ function ArticlePreview({
 
             <span className="article-preview__author">{author}</span>
             <span className="article-preview__date">
-              {moment(date).format("MMMM Do, YYYY")}
+              {moment.unix(date).format("MMMM Do, YYYY")}
             </span>
           </div>
 

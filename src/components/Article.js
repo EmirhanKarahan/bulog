@@ -15,7 +15,7 @@ const Article = ({ article }) => {
             <div className="article__text">{article.content}</div>
             <span className="article__author">{article.author}</span>
             <span className="article__date">
-              {moment(article.date).format("MMMM Do, YYYY")}
+              {moment.unix(article.date).format("MMMM Do, YYYY")}
             </span>
           </div>
         </div>

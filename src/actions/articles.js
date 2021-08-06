@@ -1,4 +1,5 @@
 import moment from "moment";
+
 import { history } from "../routers/AppRouter";
 import {
   addArticleFirebase,
@@ -29,7 +30,7 @@ export const startAddArticle = (articleData = {}) => {
       date = moment().unix(),
       author = username
     } = articleData;
-
+    
     const imageUrl = await uploadImageFirebase(image);
     const article = { author, title, subtitle, content, date, imageUrl};
     const ref = await addArticleFirebase(uid, article);

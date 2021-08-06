@@ -7,16 +7,22 @@
 
 .article-preview__title {
   line-height: 1;
+  word-break: break-all;
 }
 
 .article-preview__subtitle {
   line-height: 1;
+  word-break: break-all;
 }
 
 .article-preview__image {
-  width: 30rem;
-  height: 20rem;
   object-fit: cover;
+  display: none;
+  @media (min-width: $desktop-breakpoint) {
+    display: inline;
+    width: 30rem;
+    height: 20rem;
+  }
 }
 
 .article-preview__date {
@@ -31,8 +37,17 @@
   content: " - ";
 }
 
+.article-preview__right {
+  margin-left: $s-size;
+}
+
 .article-preview__right__toolbox {
   display: flex;
-  justify-content: space-around;
-  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  @media (min-width: $desktop-breakpoint) {
+    justify-content: space-around;
+    flex-direction: row;
+    align-items: center;
+  }
 }

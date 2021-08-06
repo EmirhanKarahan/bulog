@@ -23,8 +23,8 @@ export function Header({ startLogin, startLogout, isAuthenticated }) {
                 />
                 Logout
               </button>
-              <div>
-                <Link className="url-link" to="/create">
+              <div className="flex">
+                <Link className="url-link flex justify-center items-center" to="/create">
                   <img
                     src="/images/favicon.ico"
                     width="20px"
@@ -33,7 +33,7 @@ export function Header({ startLogin, startLogout, isAuthenticated }) {
                   />
                   <b>Create</b>
                 </Link>
-                <Link className="url-link ml-1" to="/edit">
+                <Link className="url-link ml-1 flex justify-center items-center" to="/edit">
                   <img
                     src="/images/gear.svg"
                     width="20px"

@@ -5,10 +5,10 @@ const Dotenv = require("dotenv-webpack");
 process.env.NODE_ENV = process.env.NODE_ENV || "development";
 
 module.exports = (env) => {
-  const isProduction = env === 'production';
-
+  const isProduction = env.production;
   return {
-    devtool: isProduction ? 'source-map' : 'inline-source-map',
+    devtool: isProduction ? "source-map" : "inline-source-map",
+    mode: isProduction ? "production" : "",
     entry: ["babel-polyfill", "./src/app.js"],
     output: {
       path: path.resolve(__dirname, "public", "dist"),
@@ -16,7 +16,7 @@ module.exports = (env) => {
     },
     plugins: [
       new MiniCssExtractPlugin({ filename: "styles.css" }),
-      new Dotenv({path:`./.env.${process.env.NODE_ENV}`})
+      new Dotenv({ path: `./.env.${process.env.NODE_ENV}` }),
     ],
     module: {
       rules: [

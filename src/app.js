@@ -9,7 +9,6 @@ import firebase from "./firebase/firebase";
 import { login, logout } from "./actions/auth";
 
 import "normalize.css";
-import "react-toastify/dist/ReactToastify.min.css";
 import "./styles/styles.scss";
 
 const store = configureStore();

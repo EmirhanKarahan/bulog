@@ -1,5 +1,5 @@
 # Bulog
-bulog is a minimalistic blog app, made using react, redux and firebase. [bulogapp.herokuapp.com](bulogapp.herokuapp.com)
+bulog is a minimalistic blog app, made using react, redux and firebase. [bulogapp.herokuapp.com](https://www.bulogapp.herokuapp.com)
 
 ## Install
 

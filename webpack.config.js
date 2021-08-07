@@ -1,6 +1,7 @@
 const path = require("path");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const Dotenv = require("dotenv-webpack");
+const webpack = require("webpack");
 
 process.env.NODE_ENV = process.env.NODE_ENV || "development";
 
@@ -17,6 +18,19 @@ module.exports = (env) => {
     plugins: [
       new MiniCssExtractPlugin({ filename: "styles.css" }),
       new Dotenv({ path: `./.env.${process.env.NODE_ENV}` }),
+      ...(isProduction
+        ? [
+            new webpack.EnvironmentPlugin([
+              "FIREBASE_DATABASE_URL",
+              "FIREBASE_API_KEY",
+              "FIREBASE_AUTH_DOMAIN",
+              "FIREBASE_PROJECT_ID",
+              "FIREBASE_STORAGE_BUCKET",
+              "FIREBASE_MESSAGING_SENDER_ID",
+              "FIREBASE_APP_ID",
+            ]),
+          ]
+        : []),
     ],
     module: {
       rules: [

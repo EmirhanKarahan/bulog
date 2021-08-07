@@ -35,6 +35,7 @@ function ArticlePreview({
               <img
                 src={imageUrl}
                 to={`/read/${id}`}
+                loading="lazy"
                 className="article-preview__image"
               />
             </Link>

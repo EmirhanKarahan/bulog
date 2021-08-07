@@ -8,7 +8,7 @@ const Article = ({ article }) => {
     <article className="article">
       <div className="content-container">
         <div className="article__content">
-          <img src={article.imageUrl} className="article__image" />
+          <img src={article.imageUrl} loading="lazy" className="article__image" />
           <div className="article__meta">
             <h2 className="article__title">{article.title}</h2>
             <h4 className="article__subtitle">{article.subtitle}</h4>

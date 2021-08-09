@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import ArticlePreview from "./ArticlePreview";
 
-const ArticleList = ({ editable, articles }) => {
+export const ArticleList = ({ editable, articles }) => {
   return articles.length > 0 ? articles.map((article) => (
     <ArticlePreview editable={editable} key={article.id} {...article} />
   )) : <div className="content-container">There is no article 😔 Please, add one 😁</div>;

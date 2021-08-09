@@ -1,0 +1,41 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render ArticeList with 'no article' message 1`] = `
+<div
+  className="content-container"
+>
+  There is no article 😔 Please, add one 😁
+</div>
+`;
+
+exports[`should render ArticleList with articles 1`] = `
+Array [
+  <Connect(ArticlePreview)
+    content="Cool article"
+    date={0}
+    id="1"
+    imageUrl="https://firebasestorage.googleapis.com/1"
+    key="1"
+    subtitle="First Article's Subtitle"
+    title="First Article"
+  />,
+  <Connect(ArticlePreview)
+    content="Really nice article"
+    date={1000}
+    id="2"
+    imageUrl="https://firebasestorage.googleapis.com/2"
+    key="2"
+    subtitle="Second Article's Subtitle"
+    title="Second Article"
+  />,
+  <Connect(ArticlePreview)
+    content="Superb article"
+    date={-1000}
+    id="3"
+    imageUrl="https://firebasestorage.googleapis.com/3"
+    key="3"
+    subtitle="Third Article's Subtitle"
+    title="Third Article"
+  />,
+]
+`;

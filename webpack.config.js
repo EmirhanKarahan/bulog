@@ -17,7 +17,6 @@ module.exports = (env) => {
     },
     plugins: [
       new MiniCssExtractPlugin({ filename: "styles.css" }),
-      new Dotenv({ path: `./.env.${process.env.NODE_ENV}` }),
       ...(isProduction
         ? [
             new webpack.EnvironmentPlugin([
@@ -30,7 +29,7 @@ module.exports = (env) => {
               "FIREBASE_APP_ID",
             ]),
           ]
-        : []),
+        : [new Dotenv({ path: `./.env.${process.env.NODE_ENV}` })]),
     ],
     module: {
       rules: [

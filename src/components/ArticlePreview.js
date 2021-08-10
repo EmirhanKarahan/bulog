@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { startRemoveArticle } from "../actions/articles";
 
-function ArticlePreview({
+export function ArticlePreview({
   id,
   author,
   title,

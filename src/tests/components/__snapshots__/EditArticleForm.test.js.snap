@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render EditArticleForm correctly 1`] = `
+<Formik
+  content="Cool article"
+  date={0}
+  handleSubmit={[Function]}
+  id="1"
+  imageUrl="https://firebasestorage.googleapis.com/1"
+  initialValues={
+    Object {
+      "content": "Cool article",
+      "image": undefined,
+      "imageUrl": "https://firebasestorage.googleapis.com/1",
+      "subtitle": "First Article's Subtitle",
+      "title": "First Article",
+    }
+  }
+  onSubmit={[Function]}
+  subtitle="First Article's Subtitle"
+  title="First Article"
+  validationSchema={[Function]}
+>
+  <Component />
+</Formik>
+`;

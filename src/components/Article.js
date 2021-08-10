@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import moment from "moment";
 import { Redirect } from "react-router-dom";
 
-const Article = ({ article }) => {
+export const Article = ({ article }) => {
   return article ? (
     <article className="article">
       <div className="content-container">

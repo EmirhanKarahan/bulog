@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render CreateArticlePage correctly 1`] = `
+<div
+  className="content-container"
+>
+  <h1>
+    Create your article
+  </h1>
+  <WithFormik(CreateArticleForm)
+    onSubmit={[Function]}
+  />
+</div>
+`;

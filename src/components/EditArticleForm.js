@@ -3,7 +3,7 @@ import { Form, Field, withFormik } from "formik";
 import AutoSizeTextArea from "react-textarea-autosize";
 import * as Yup from "yup";
 
-function EditArticleForm({
+export function EditArticleForm({
   values,
   errors,
   touched,
@@ -17,7 +17,7 @@ function EditArticleForm({
         <img className="spinner" src="/images/spinner.svg" alt="spinner" />
       )}
       <div className="error-area">
-        {Object.keys(touched).map((field) => {
+        {touched && Object.keys(touched).map((field) => {
           if (errors[field]) {
             return (
               <span key={field} className="error-msg">
@@ -55,7 +55,7 @@ function EditArticleForm({
         <img src={values.imageUrl} alt="" className="image-preview" />
       )}
       <label className="file-input__label mb-1">
-        {values.image ? values.image.name : "Change the image"}
+        {values?.image ? values.image.name : "Change the image"}
         <input
           type="file"
           disabled={isSubmitting}

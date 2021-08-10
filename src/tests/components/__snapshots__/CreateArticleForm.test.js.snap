@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render CreateArticleForm correctly 1`] = `
+<Formik
+  handleSubmit={[Function]}
+  initialValues={
+    Object {
+      "content": "",
+      "image": undefined,
+      "subtitle": "",
+      "title": "",
+    }
+  }
+  onSubmit={[Function]}
+  validationSchema={[Function]}
+>
+  <Component />
+</Formik>
+`;

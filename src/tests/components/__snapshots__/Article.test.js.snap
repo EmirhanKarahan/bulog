@@ -1,0 +1,48 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render Article correctly 1`] = `
+<article
+  className="article"
+>
+  <div
+    className="content-container"
+  >
+    <div
+      className="article__content"
+    >
+      <img
+        className="article__image"
+        loading="lazy"
+        src="https://firebasestorage.googleapis.com/2"
+      />
+      <div
+        className="article__meta"
+      >
+        <h2
+          className="article__title"
+        >
+          Second Article
+        </h2>
+        <h4
+          className="article__subtitle"
+        >
+          Second Article's Subtitle
+        </h4>
+        <div
+          className="article__text"
+        >
+          Really nice article
+        </div>
+        <span
+          className="article__author"
+        />
+        <span
+          className="article__date"
+        >
+          January 1st, 1970
+        </span>
+      </div>
+    </div>
+  </div>
+</article>
+`;

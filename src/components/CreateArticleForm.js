@@ -3,7 +3,7 @@ import { Form, Field, withFormik } from "formik";
 import AutoSizeTextArea from "react-textarea-autosize";
 import * as Yup from "yup";
 
-function CreateArticleForm({
+export function CreateArticleForm({
   values,
   errors,
   touched,
@@ -12,17 +12,20 @@ function CreateArticleForm({
 }) {
   return (
     <Form className={"create-article-form"}>
-      {isSubmitting && <img className="spinner" src="/images/spinner.svg" alt="spinner"/>}
+      {isSubmitting && (
+        <img className="spinner" src="/images/spinner.svg" alt="spinner" />
+      )}
       <div className="error-area">
-        {Object.keys(touched).map((field) => {
-          if (errors[field]) {
-            return (
-              <span key={field} className="error-msg">
-                {errors[field]}
-              </span>
-            );
-          }
-        })}
+        {touched &&
+          Object.keys(touched).map((field) => {
+            if (errors[field]) {
+              return (
+                <span key={field} className="error-msg">
+                  {errors[field]}
+                </span>
+              );
+            }
+          })}
       </div>
       <Field
         type="text"
@@ -47,7 +50,7 @@ function CreateArticleForm({
         placeholder="Your unique blog post"
       />
       <label className="file-input__label mb-1">
-        {values.image ? values.image.name : "Choose an image"}
+        {values?.image ? values.image.name : "Choose an image"}
         <input
           type="file"
           name="image"

@@ -1,0 +1,139 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render ArticlePreview Editable with given article 1`] = `
+<article
+  className="article-preview"
+>
+  <div
+    className="content-container"
+  >
+    <div
+      className="article-preview__content"
+    >
+      <div
+        className="article-preview__meta"
+      >
+        <Link
+          className="url-link"
+          to="/read/2"
+        >
+          <h2
+            className="article-preview__title"
+          >
+            Second Article
+          </h2>
+          <h4
+            className="article-preview__subtitle"
+          >
+            Second Article's Subtitle
+          </h4>
+        </Link>
+        <span
+          className="article-preview__author"
+        />
+        <span
+          className="article-preview__date"
+        >
+          January 1st, 1970
+        </span>
+      </div>
+      <div
+        className="article-preview__right"
+      >
+        <Link
+          className="url-link"
+          to="/read/2"
+        >
+          <img
+            className="article-preview__image"
+            loading="lazy"
+            src="https://firebasestorage.googleapis.com/2"
+            to="/read/2"
+          />
+        </Link>
+        <div
+          className="article-preview__right__toolbox"
+        >
+          <Link
+            className="url-link flex justify-center items-center"
+            to="/edit/2"
+          >
+            <img
+              alt=""
+              height="20px"
+              src="/images/gear.svg"
+              width="20px"
+            />
+            <b>
+              Edit
+            </b>
+          </Link>
+          <button
+            className="button button--danger"
+            onClick={[Function]}
+          >
+            Delete
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+`;
+
+exports[`should render ArticlePreview with given article 1`] = `
+<article
+  className="article-preview"
+>
+  <div
+    className="content-container"
+  >
+    <div
+      className="article-preview__content"
+    >
+      <div
+        className="article-preview__meta"
+      >
+        <Link
+          className="url-link"
+          to="/read/1"
+        >
+          <h2
+            className="article-preview__title"
+          >
+            First Article
+          </h2>
+          <h4
+            className="article-preview__subtitle"
+          >
+            First Article's Subtitle
+          </h4>
+        </Link>
+        <span
+          className="article-preview__author"
+        />
+        <span
+          className="article-preview__date"
+        >
+          January 1st, 1970
+        </span>
+      </div>
+      <div
+        className="article-preview__right"
+      >
+        <Link
+          className="url-link"
+          to="/read/1"
+        >
+          <img
+            className="article-preview__image"
+            loading="lazy"
+            src="https://firebasestorage.googleapis.com/1"
+            to="/read/1"
+          />
+        </Link>
+      </div>
+    </div>
+  </div>
+</article>
+`;

@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render EditArticleDashboardPage correctly 1`] = `
+<Connect(ArticleList)
+  editable={true}
+/>
+`;

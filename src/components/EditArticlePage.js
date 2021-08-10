@@ -4,7 +4,7 @@ import { Redirect } from "react-router-dom";
 import EditArticleForm from "./EditArticleForm";
 import { startEditArticle } from "../actions/articles";
 
-const EditArticlePage = (props) => {
+export const EditArticlePage = (props) => {
   const onSubmit = (updatedArticle) => {
     props.dispatch(startEditArticle(props.article.id, updatedArticle));
   };

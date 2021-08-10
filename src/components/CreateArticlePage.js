@@ -3,9 +3,9 @@ import { connect } from "react-redux";
 import { startAddArticle } from "../actions/articles";
 import CreateArticleForm from "./CreateArticleForm";
 
-const CreateArticlePage = (props) => {
+export const CreateArticlePage = (props) => {
   const onSubmit = (article) => {
-    props.dispatch(startAddArticle(article));
+    props.onSubmit(article);
   };
 
   return (
@@ -16,4 +16,10 @@ const CreateArticlePage = (props) => {
   );
 };
 
-export default connect()(CreateArticlePage);
+const mapDispatchToProps = (dispatch) =>{
+  return {
+    onSubmit : (article) => dispatch(startAddArticle(article))
+  }
+}
+
+export default connect(undefined, mapDispatchToProps)(CreateArticlePage);

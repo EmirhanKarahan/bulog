@@ -38,6 +38,7 @@
 
 .article__image {
   width: 98%;
+  height: 20rem;
   object-fit: cover;
 
   @media (min-width: $desktop-breakpoint) {

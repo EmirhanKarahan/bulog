@@ -11,7 +11,7 @@ export function CreateArticleForm({
   setFieldValue,
 }) {
   return (
-    <Form className={"create-article-form"}>
+    <Form className={"create-article-form"} autoComplete="off">
       {isSubmitting && (
         <img className="spinner" src="/images/spinner.svg" alt="spinner" />
       )}

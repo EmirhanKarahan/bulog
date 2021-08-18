@@ -12,7 +12,7 @@ export function EditArticleForm({
   rest,
 }) {
   return (
-    <Form className={"edit-article-form"}>
+    <Form className={"edit-article-form"} autoComplete="off">
       {isSubmitting && (
         <img className="spinner" src="/images/spinner.svg" alt="spinner" />
       )}

@@ -1,5 +1,5 @@
 import moment from "moment";
-
+import { toast } from "react-toastify";
 import { history } from "../routers/AppRouter";
 import {
   addArticleFirebase,
@@ -28,14 +28,22 @@ export const startAddArticle = (articleData = {}) => {
       content = "",
       image = undefined,
       date = moment().unix(),
-      author = username
+      author = username,
     } = articleData;
-    
+
     const imageUrl = await uploadImageFirebase(image);
-    const article = { author, title, subtitle, content, date, imageUrl};
-    const ref = await addArticleFirebase(uid, article);
-    dispatch(addArticle({ id: ref.key, ...article }));
-    history.push("/");
+    const article = { author, title, subtitle, content, date, imageUrl };
+    try {
+      const ref = await addArticleFirebase(uid, article);
+      dispatch(addArticle({ id: ref.key, ...article }));
+    } catch (err) {
+      if (err.code == "PERMISSION_DENIED") toast.error("🙄 Temporarily closed");
+      else {
+        toast.error("Firebase error 😥");
+      }
+    } finally {
+      history.push("/");
+    }
   };
 };
 
@@ -56,9 +64,18 @@ export const startEditArticle = (
       imageUrl = await uploadImageFirebase(image);
     }
     const updates = { title, subtitle, content, imageUrl };
-    await editArticleFirebase(uid, id, updates);
-    dispatch(editArticle(id, updates));
-    history.push(`/read/${id}`);
+
+    try {
+      await editArticleFirebase(uid, id, updates);
+      dispatch(editArticle(id, updates));
+    } catch (err) {
+      if (err.code == "PERMISSION_DENIED") toast.error("🙄 Temporarily closed");
+      else {
+        toast.error("Firebase error 😥");
+      }
+    } finally {
+      history.push(`/read/${id}`);
+    }
   };
 };
 
@@ -70,11 +87,18 @@ export const removeArticle = ({ id } = {}) => ({
 export const startRemoveArticle = ({ id } = {}) => {
   return async (dispatch, getState) => {
     const uid = getState().auth.uid;
-    dispatch(removeArticle({ id }));
     const snapshot = await getArticleByIdFirebase(uid, id);
     const imageUrl = snapshot.val().imageUrl;
-    await deleteImageFirebase(imageUrl);
-    await removeArticleFirebase(uid, id);
+    try {
+      await removeArticleFirebase(uid, id);
+      dispatch(removeArticle({ id }));
+      await deleteImageFirebase(imageUrl);
+    } catch (err) {
+      if (err.code == "PERMISSION_DENIED") toast.error("🙄 Temporarily closed");
+      else {
+        toast.error("Firebase error 😥");
+      }
+    }
   };
 };
 
@@ -88,8 +112,8 @@ export const startSetArticles = () => {
     const uid = getState().auth.uid;
     const firebaseArticles = await getArticlesAllFirebase(uid);
     const articles = [];
-    for(const articleKey in firebaseArticles){
-      articles.push({id:articleKey, ...firebaseArticles[articleKey]})
+    for (const articleKey in firebaseArticles) {
+      articles.push({ id: articleKey, ...firebaseArticles[articleKey] });
     }
     dispatch(setArticles(articles));
   };

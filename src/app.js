@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
+import { ToastContainer } from "react-toastify";
 
 import configureStore from "./configureStore";
 import AppRouter, { history } from "./routers/AppRouter";
@@ -10,14 +11,22 @@ import firebase from "./firebase/firebase";
 import { login, logout } from "./actions/auth";
 
 import "normalize.css";
+import "react-toastify/dist/ReactToastify.min.css";
 import "./styles/styles.scss";
-
 
 const store = configureStore();
 
 const jsx = (
   <Provider store={store}>
     <AppRouter />
+    <ToastContainer
+      autoClose={5000}
+      hideProgressBar
+      closeOnClick
+      pauseOnFocusLoss={false}
+      draggable
+      pauseOnHover={false}
+    />
   </Provider>
 );
 
